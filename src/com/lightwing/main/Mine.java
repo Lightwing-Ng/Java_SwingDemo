@@ -10,16 +10,16 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Mine extends JPanel implements ActionListener {
+    // extends from JPanel
     private static int width = 30;
     private static int height = 16;
-    private static int frameWidth = 690;
-    private static int frameHeight = 370;
+    private static int frameWidth = 768;
+    private static int frameHeight = 480;
     private static int[][] board = new int[height][width];
     private static int[][] onOffBoard = new int[height][width];
-    private static int[] template = {-1, 0, 1};
+    private static int[] template = {-1, 0, 1}; // status of a block
     private static Timer secondsTimer;
-    private static int startX = 20;
-    private static int startY = 110;
+    private static int startX = 20, startY = 110;
     private static boolean firstClick = true;
     private static boolean gameOver = false;
     private static Color buttonColorChange = Color.LIGHT_GRAY;
@@ -28,50 +28,48 @@ public class Mine extends JPanel implements ActionListener {
     private static int secondsCounter = 0;
 
     private Mine() {
-        for (int i = 0; i < height; i++) {
+        for (int i = 0; i < height; i++)
             Arrays.fill(onOffBoard[i], 1);
-        }
         Timer timer = new Timer(1000 / 30, this);
         timer.start();
         ActionListener taskPerformer = evt -> secondsCounter++;
         secondsTimer = new Timer(1000, taskPerformer);
-
     }
 
     private static void makeBoard(int y, int x) {
-        for (int i = 0; i < height; i++) {
+        for (int i = 0; i < height; i++)
             Arrays.fill(board[i], 0);
-        }
+
         int K = 99; // number of mines
         Random rand = new Random();
-        int templateIndex1;
-        int templateIndex2;
+        int templateIndex1, templateIndex2;
 
         while (--K > 0) {
             if (K == 0)
                 break;
             int rand1 = rand.nextInt(16);
             int rand2 = rand.nextInt(30);
-            if (board[rand1][rand2] == 9) { // if mine is already there extend loop
+            if (board[rand1][rand2] == 9) {
+                // if mine is already there extend loop
                 K++;
                 continue;
             }
-            if (rand1 == y && rand2 == x) { // if mine is chosen on first click
+            if (rand1 == y && rand2 == x) {
+                // if mine is chosen on first click
                 K++;
                 continue;
             }
 
             board[rand1][rand2] = 9; // plant mine
-            for (int index1 = 0; index1 < 3; index1++) { // set the numbers around mine
+            for (int index1 = 0; index1 < 3; index1++) {
+                // set the numbers around mine
                 for (int index2 = 0; index2 < 3; index2++) {
                     templateIndex1 = template[index1];
                     templateIndex2 = template[index2];
-
                     try {
                         int pos = board[rand1 + templateIndex1][rand2 + templateIndex2];
-                        if (pos != 9) {
+                        if (pos != 9)
                             board[rand1 + templateIndex1][rand2 + templateIndex2] = pos + 1;
-                        }
                     } catch (java.lang.ArrayIndexOutOfBoundsException ignored) {
                     }
                 }
@@ -157,8 +155,7 @@ public class Mine extends JPanel implements ActionListener {
             }
         });
         frame.setVisible(true);
-        int windowWidth = 750;
-        int windowHeight = 600;
+        int windowWidth = 750, windowHeight = 600;
         frame.setSize(windowWidth, windowHeight);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
@@ -172,12 +169,14 @@ public class Mine extends JPanel implements ActionListener {
     }
 
     private static void hasWon() {
+        // Scan to see if all the blocks are clean
         int blankCounter = 0;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++)
                 if (onOffBoard[i][j] == 0)
                     blankCounter++;
         }
+        // if it hits 382, game is over!
         if (blankCounter == 382) {
             buttonFace = "B)";
             gameOver();
@@ -205,6 +204,7 @@ public class Mine extends JPanel implements ActionListener {
     }
 
     public void paint(Graphics g) {
+        // plant a plane randomly in Graphics g
         g.setColor(Color.WHITE);
         g.fillRect(startX, startY, frameWidth, frameHeight);
         for (int i = 0; i < height; i++) {
