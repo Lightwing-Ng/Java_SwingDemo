@@ -496,5 +496,7 @@ public class Mine extends JPanel implements ActionListener {
 逻辑要点：
 
 1. JFrame 的创建和使用；
-2. 分布问题，推荐使用 GridLayout 布局管理器；
-3. 事件的捕捉，
+2. 分布问题，推荐使用 `GridLayout` 布局管理器；
+3. 事件的捕捉，监听左右键；
+4. 渲染窗口和显示。
+
