@@ -7,8 +7,8 @@ public class HelloJTextField {
     public static void main(String[] args) { // Main Method()
         JFrame jf = new JFrame("Hello, Text");
         jf.setLayout(new FlowLayout());
-        // adding a new text field
 
+        // adding a new text field
         JTextArea jTextArea = new JTextArea(5, 10);
         jTextArea.setText("Type something here...");
         jf.add(jTextArea);

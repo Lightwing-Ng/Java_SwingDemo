@@ -2,8 +2,6 @@ package com.lightwing.main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class HelloEvent {
     // to create a object of TextArea
@@ -19,12 +17,7 @@ public class HelloEvent {
         // adding a button to the window
         JButton jButton = new JButton("My Button");
         jFrame.add(jButton);
-        jButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                HelloEvent.jTextField.setText("The Button was hit");
-            }
-        });
+        jButton.addActionListener(e -> HelloEvent.jTextField.setText("The Button was hit"));
         showMe(jFrame);
     }
 
