@@ -213,10 +213,8 @@ public class Mine extends JPanel implements ActionListener {
                     g.setColor(Color.BLACK);
                     g.fillRect(startX + j * 23, startY + i * 23, 22, 22);
                 } else if (onOffBoard[i][j] == 0) {
-                    if (board[i][j] == 9) {
-                        if (!buttonFace.equals("B)")) {
-                            g.setColor(Color.RED);
-                        }
+                    if (board[i][j] == 9 && !buttonFace.equals("B)")) {
+                        g.setColor(Color.RED);
                     } else {
                         g.setColor(Color.LIGHT_GRAY);
                     }
